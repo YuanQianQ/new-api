@@ -262,6 +262,10 @@ export function RedisConnectionReport() {
                 value={formatNumber(report.pool.size)}
               />
               <Metric
+                label={t('Minimum idle connections')}
+                value={formatNumber(report.pool.min_idle_conns)}
+              />
+              <Metric
                 label={t('Pool hits')}
                 value={formatNumber(report.pool.hits)}
               />

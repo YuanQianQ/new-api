@@ -9,13 +9,14 @@ import (
 )
 
 type RedisPoolReport struct {
-	Size       int    `json:"size"`
-	Hits       uint32 `json:"hits"`
-	Misses     uint32 `json:"misses"`
-	Timeouts   uint32 `json:"timeouts"`
-	TotalConns uint32 `json:"total_conns"`
-	IdleConns  uint32 `json:"idle_conns"`
-	StaleConns uint32 `json:"stale_conns"`
+	Size         int    `json:"size"`
+	MinIdleConns int    `json:"min_idle_conns"`
+	Hits         uint32 `json:"hits"`
+	Misses       uint32 `json:"misses"`
+	Timeouts     uint32 `json:"timeouts"`
+	TotalConns   uint32 `json:"total_conns"`
+	IdleConns    uint32 `json:"idle_conns"`
+	StaleConns   uint32 `json:"stale_conns"`
 }
 
 type RedisServerReport struct {
@@ -67,6 +68,7 @@ func GetRedisConnectionReport(ctx context.Context) RedisConnectionReport {
 	report.Database = options.DB
 	report.TLSEnabled = options.TLSConfig != nil
 	report.Pool.Size = options.PoolSize
+	report.Pool.MinIdleConns = options.MinIdleConns
 
 	pingStartedAt := time.Now()
 	if err := RDB.Ping(ctx).Err(); err != nil {

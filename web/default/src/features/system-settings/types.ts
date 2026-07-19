@@ -41,6 +41,7 @@ export type UpdateOptionResponse = {
 
 export type RedisPoolReport = {
   size: number
+  min_idle_conns: number
   hits: number
   misses: number
   timeouts: number
