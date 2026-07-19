@@ -25,6 +25,7 @@ import { Dialog } from '@/components/dialog'
 import { Button } from '@/components/ui/button'
 import { Markdown } from '@/components/ui/markdown'
 import { formatTimestamp, formatTimestampToDate } from '@/lib/format'
+import { cn } from '@/lib/utils'
 
 import { SettingsSection } from '../components/settings-section'
 import { RedisConnectionReport } from './redis-connection-report'
@@ -109,11 +110,31 @@ export function UpdateCheckerSection({
       <SettingsSection title={t('System maintenance')}>
         <div className='space-y-6'>
           <div className='grid gap-4 md:grid-cols-2'>
-            <div className='rounded-lg border p-4'>
-              <div className='text-muted-foreground text-sm'>
-                {t('Current version')}
+            <div className='flex min-w-0 items-center justify-between gap-4 rounded-lg border p-4'>
+              <div className='min-w-0'>
+                <div className='text-muted-foreground text-sm'>
+                  {t('Current version')}
+                </div>
+                <div className='truncate text-lg font-semibold'>{version}</div>
               </div>
-              <div className='text-lg font-semibold'>{version}</div>
+              <Button
+                size='sm'
+                className='shrink-0'
+                onClick={handleCheckUpdates}
+                disabled={checking}
+                aria-label={t('Check for updates')}
+                title={t('Check for updates')}
+              >
+                <span
+                  className={cn('flex', checking && 'animate-spin')}
+                  aria-hidden='true'
+                >
+                  <RefreshCcwIcon />
+                </span>
+                <span className='hidden sm:inline'>
+                  {checking ? t('Checking updates...') : t('Check for updates')}
+                </span>
+              </Button>
             </div>
             <div className='rounded-lg border p-4'>
               <div className='text-muted-foreground text-sm'>
@@ -122,17 +143,6 @@ export function UpdateCheckerSection({
               <div className='text-lg font-semibold'>{uptime}</div>
             </div>
           </div>
-
-          <Button onClick={handleCheckUpdates} disabled={checking}>
-            {checking ? (
-              t('Checking updates...')
-            ) : (
-              <>
-                <RefreshCcwIcon className='me-2 h-4 w-4' />
-                {t('Check for updates')}
-              </>
-            )}
-          </Button>
 
           <RedisConnectionReport />
         </div>
