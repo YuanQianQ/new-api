@@ -25,8 +25,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 type SearchRecord = Record<string, unknown>
 
-// Page size persists globally under the classic theme's key (raw number
-// string), so the choice is remembered and carries over from classic.
+// Page size persists globally so the choice is shared across all tables.
 const PAGE_SIZE_STORAGE_KEY = 'page-size'
 
 function getStoredPageSize(): number | undefined {
