@@ -39,6 +39,53 @@ export type UpdateOptionResponse = {
   message: string
 }
 
+export type RedisPoolReport = {
+  size: number
+  hits: number
+  misses: number
+  timeouts: number
+  total_conns: number
+  idle_conns: number
+  stale_conns: number
+}
+
+export type RedisServerReport = {
+  version: string
+  mode: string
+  role: string
+  uptime_seconds: number
+  connected_clients: number
+  used_memory_bytes: number
+  peak_memory_bytes: number
+  max_memory_bytes: number
+  key_count: number
+  total_connections_received: number
+  total_commands_processed: number
+  operations_per_second: number
+}
+
+export type RedisConnectionReport = {
+  enabled: boolean
+  connected: boolean
+  checked_at: number
+  ping_latency_ms: number
+  endpoint: string
+  database: number
+  tls_enabled: boolean
+  pool: RedisPoolReport
+  server: RedisServerReport
+  server_info_available: boolean
+  key_count_available: boolean
+  error?: string
+  info_error?: string
+}
+
+export type RedisConnectionReportResponse = {
+  success: boolean
+  message: string
+  data?: RedisConnectionReport
+}
+
 export type ConfirmPaymentComplianceResponse = {
   success: boolean
   message: string

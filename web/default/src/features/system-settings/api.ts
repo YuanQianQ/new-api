@@ -22,6 +22,7 @@ import type {
   ConfirmPaymentComplianceResponse,
   FetchUpstreamRatiosRequest,
   LogCleanupTask,
+  RedisConnectionReportResponse,
   SystemOptionsResponse,
   SystemTaskListResponse,
   SystemTaskResponse,
@@ -30,6 +31,14 @@ import type {
   UpstreamChannelsResponse,
   UpstreamRatiosResponse,
 } from './types'
+
+export async function getRedisConnectionReport() {
+  const res = await api.get<RedisConnectionReportResponse>(
+    '/api/system-info/redis',
+    { skipErrorHandler: true }
+  )
+  return res.data
+}
 
 export async function getSystemOptions() {
   const res = await api.get<SystemOptionsResponse>('/api/option/')

@@ -27,6 +27,7 @@ import { Markdown } from '@/components/ui/markdown'
 import { formatTimestamp, formatTimestampToDate } from '@/lib/format'
 
 import { SettingsSection } from '../components/settings-section'
+import { RedisConnectionReport } from './redis-connection-report'
 
 type ReleaseInfo = {
   tag_name: string
@@ -132,6 +133,8 @@ export function UpdateCheckerSection({
               </>
             )}
           </Button>
+
+          <RedisConnectionReport />
         </div>
       </SettingsSection>
 
